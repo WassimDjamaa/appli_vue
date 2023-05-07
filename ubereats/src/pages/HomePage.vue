@@ -2,11 +2,10 @@
   <div class="home">
       <div class="header">
           <img src="../assets/logo_uber_eats.svg" alt="" srcset="">
-          <input type="text" name="" id="" placeholder="De quoi avez-vous envie ?">
+          <input v-model="user_search_restaurant" type="text" name="" id="" placeholder="De quoi avez-vous envie ?">
       </div>
 
-      <div class="banniere">
-
+      <div class="banner">
       </div>
     <RestaurantRow v-for="(data, i) in data_restaurant" :key="i" :three_restaurant="data"/>
   </div>
@@ -14,7 +13,7 @@
 
 <script>
 import BDD from "../BDD";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import RestaurantRow from "@/components/RestaurantRow.vue";
 export default {
   name: 'HomePage',
@@ -33,10 +32,14 @@ export default {
       }
 
       let data_restaurant = ref([]); // data_restaurant.value = []
+      let all_restaurant = [];
       const makeDataRestaurant = () => {
           let three_restaurant = [];
           for (const restaurant of BDD) {
               const new_restaurant = new Restaurant(restaurant.name, restaurant.note, restaurant.image, restaurant.drive_time);
+              // make all restaurant array
+              all_restaurant.push(new_restaurant);
+
 
               if (three_restaurant.length === 2) {
                   three_restaurant.push(new_restaurant);
@@ -48,12 +51,24 @@ export default {
           }
       }
 
+      // User search restaurant
+      let user_search_restaurant = ref('');
+
+      watch(user_search_restaurant, newValue => {
+          let regex = RegExp(newValue);
+
+          let search_restaurant  = all_restaurant.filter(restaurant => regex.test(restaurant.name));
+
+          console.log(search_restaurant);
+      })
+
       onMounted(() => {
           makeDataRestaurant();
       })
 
       return {
           data_restaurant,
+          user_search_restaurant
       }
   }
 }
@@ -83,7 +98,7 @@ export default {
       }
     }
 
-    .banniere{
+    .banner{
       height: 200px;
       width: 100%;
       background-image: url("../assets/VinylBanner-V1-Chinese_2048x.jpg.webp");
