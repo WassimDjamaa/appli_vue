@@ -1,5 +1,13 @@
 <template>
-  <div id="home">
+  <div class="home">
+      <div class="header">
+          <img src="../assets/logo_uber_eats.svg" alt="" srcset="">
+          <input type="text" name="" id="" placeholder="De quoi avez-vous envie ?">
+      </div>
+
+      <div class="banniere">
+
+      </div>
     <RestaurantRow v-for="(data, i) in data_restaurant" :key="i" :three_restaurant="data"/>
   </div>
 </template>
@@ -53,5 +61,34 @@ export default {
 </script>
 
 <style lang="scss">
+  .home {
+    .header{
+      height: 120px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
+      img{
+        width: 200px;
+      }
+
+      input{
+        background-color: #f6f6f6;
+        border: none;
+        height: 60px;
+        width: 400px;
+        outline: none;
+        padding-left: 20px;
+      }
+    }
+
+    .banniere{
+      height: 200px;
+      width: 100%;
+      background-image: url("../assets/VinylBanner-V1-Chinese_2048x.jpg.webp");
+      background-size: cover;
+      background-position: center;
+    }
+  }
 </style>
