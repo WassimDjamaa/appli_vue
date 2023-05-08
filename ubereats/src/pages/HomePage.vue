@@ -2,7 +2,18 @@
   <div class="home">
       <div class="header">
           <img src="../assets/logo_uber_eats.svg" alt="" srcset="">
-          <input v-model="user_search_restaurant" type="text" name="" id="" placeholder="De quoi avez-vous envie ?">
+
+          <div class="wrapper--input">
+              <input v-model="user_search_restaurant" type="text" name="" id="" placeholder="De quoi avez-vous envie ?">
+              <div class="search">
+                  <div v-for="(restaurant, i) in search_restaurant" :key="i" class="container--restaurant--search">
+                      <div class="wrapper--img">
+                          <img :src="restaurant.image" alt="" srcset="">
+                      </div>
+                      <p>{{ restaurant.name }}</p>
+                  </div>
+              </div>
+          </div>
       </div>
 
       <div class="banner">
@@ -53,13 +64,14 @@ export default {
 
       // User search restaurant
       let user_search_restaurant = ref('');
+      let search_restaurant = ref([]);
 
       watch(user_search_restaurant, newValue => {
-          let regex = RegExp(newValue);
+          let regex = RegExp(newValue.toLowerCase());
 
-          let search_restaurant  = all_restaurant.filter(restaurant => regex.test(restaurant.name));
+          let new_search_restaurant  = all_restaurant.filter(restaurant => regex.test(restaurant.name.toLowerCase()));
 
-          console.log(search_restaurant);
+          (newValue == 0 ? search_restaurant.value = [] :  search_restaurant.value = new_search_restaurant);
       })
 
       onMounted(() => {
@@ -68,7 +80,8 @@ export default {
 
       return {
           data_restaurant,
-          user_search_restaurant
+          user_search_restaurant,
+          search_restaurant
       }
   }
 }
@@ -88,13 +101,46 @@ export default {
         width: 200px;
       }
 
-      input{
-        background-color: #f6f6f6;
-        border: none;
-        height: 60px;
-        width: 400px;
-        outline: none;
-        padding-left: 20px;
+      .wrapper--input{
+        position: relative;
+        input{
+          background-color: #f6f6f6;
+          border: none;
+          height: 60px;
+          width: 400px;
+          outline: none;
+          padding-left: 20px;
+        }
+
+        .search{
+          position: absolute;
+          top: 100%;
+          width: 100%;
+          background-color: #ffffff;
+
+          .container--restaurant--search{
+            display: flex;
+            align-items: center;
+            padding: 10px;
+
+            &:hover{
+              background: #f6f6f6;
+            }
+
+            .wrapper--img{
+              height: 60px;
+              width: 60px;
+              margin-right: 25px;
+              border-radius: 50%;
+              overflow: hidden;
+
+              img{
+                height: 100%;
+                width: auto;
+              }
+            }
+          }
+        }
       }
     }
 
