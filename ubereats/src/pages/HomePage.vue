@@ -4,10 +4,10 @@
           <img src="../assets/logo_uber_eats.svg" alt="" srcset="">
 
           <div class="wrapper--input">
-              <input v-model="user_search_restaurant" type="text" name="" id="" placeholder="De quoi avez-vous envie ?">
+              <input v-model="user_search_restaurant" type="text" placeholder="De quoi avez-vous envie ?">
               <div class="search">
-                  <router-link to="/restaurant">
-                      <div v-for="(restaurant, i) in search_restaurant" :key="i" class="container--restaurant--search">
+                  <router-link v-for="(restaurant, i) in search_restaurant" :key="i" :to="{name: 'myRestaurant', params: { name: restaurant.name }}">
+                      <div class="container--restaurant--search">
                           <div class="wrapper--img">
                               <img :src="restaurant.image" alt="" srcset="">
                           </div>
@@ -28,8 +28,14 @@
 import BDD from "../BDD";
 import { onMounted, ref, watch } from "vue";
 import RestaurantRow from "@/components/RestaurantRow.vue";
+import myRestaurant from "@/pages/MyRestaurant.vue";
 export default {
   name: 'HomePage',
+    computed: {
+        myRestaurant() {
+            return myRestaurant
+        }
+    },
   components: {
     RestaurantRow
   },

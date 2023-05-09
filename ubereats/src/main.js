@@ -3,11 +3,11 @@ import App from './App.vue'
 
 import {createRouter, createWebHistory} from 'vue-router';
 import HomePage from "@/pages/HomePage.vue";
-import Restaurant from "@/pages/MyRestaurant.vue";
+import myRestaurant from "@/pages/MyRestaurant.vue";
 
 const routes = [
     { path: '/', component: HomePage },
-    { path: '/restaurant', component: Restaurant },
+    { name: 'myRestaurant', path: '/restaurant/:name', component: myRestaurant },
 ]
 
 const router= createRouter({
