@@ -2,7 +2,6 @@
   <div class="home">
       <div class="header">
           <img src="../assets/logo_uber_eats.svg" alt="" srcset="">
-
           <div class="wrapper--input">
               <input v-model="user_search_restaurant" type="text" placeholder="De quoi avez-vous envie ?">
               <div class="search">
@@ -20,7 +19,12 @@
 
       <div class="banner">
       </div>
-    <RestaurantRow v-for="(data, i) in data_restaurant" :key="i" :three_restaurant="data"/>
+
+      <h2 class="title">
+          Nos restaurants
+      </h2>
+
+      <RestaurantRow v-for="(data, i) in data_restaurant" :key="i" :three_restaurant="data"/>
   </div>
 </template>
 
