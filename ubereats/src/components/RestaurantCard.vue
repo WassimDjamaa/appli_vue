@@ -64,10 +64,14 @@ export default {
 
   .restaurant--information {
     .top {
-      margin: 10px 0px;
+      margin: 10px 0;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      cursor: pointer;
+      pointer-events: none!important;
+      text-decoration: none;
+      color: black;
 
       .note {
         background-color: aliceblue;
@@ -83,6 +87,10 @@ export default {
 
     .time {
       font-size: 0.9rem;
+      cursor: pointer;
+      pointer-events: none!important;
+      text-decoration: none;
+      color: black;
     }
   }
 }</style>
