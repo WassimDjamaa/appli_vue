@@ -49,10 +49,10 @@ export default {
 
 <style lang="scss">
 .restaurant--card {
-  width: 32%;
+  width: 100%;
   height: 30vh;
   p{
-    margin: 0px;
+    margin: 0;
   }
 
   .restaurant--image {

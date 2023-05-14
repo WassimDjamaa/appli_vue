@@ -1,7 +1,10 @@
 <template>
     <div class="restaurant--row">
         <div class="wrapper--card">
-            <RestaurantCard v-for="(card, index) in three_restaurant" :info_restaurant="card" :key="index"/>
+            <Router-link class="restaurant--wrapper" v-for="(restaurant, index) in three_restaurant" :key="index" :to="{name: 'myRestaurant', params: { name: restaurant.name }}">
+                <RestaurantCard  :info_restaurant="restaurant" />
+            </Router-link>
+
         </div>
     </div>
 </template>
@@ -25,6 +28,12 @@ export default {
     .title{
         font-size: 1.5rem;
     }
+
+    .restaurant--wrapper{
+        width:32%;
+        text-decoration: none;
+    }
+
     .wrapper--card {
         display: flex;
         align-items: center;
